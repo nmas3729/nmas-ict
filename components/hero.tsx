@@ -6,8 +6,8 @@ import { ArrowRight, ShieldCheck, Award, Briefcase, FileText, CheckCircle2 } fro
 
 const trustCards = [
   { icon: CheckCircle2, label: '100% Black-Owned' },
-  { icon: ShieldCheck, label: '27.5% Black Woman-Owned' },
-  { icon: Award, label: '27.5% Black Youth-Owned' },
+  { icon: ShieldCheck, label: '36% Black Woman-Owned' },
+  { icon: Award, label: '36% Black Youth-Owned' },
   { icon: FileText, label: 'Level 1 B-BBEE' },
   { icon: CheckCircle2, label: 'Fully Tax Compliant' },
   { icon: Briefcase, label: '20+ Years ICT Experience' },
