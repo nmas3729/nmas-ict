@@ -1,4 +1,3 @@
-import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Inter, Manrope } from 'next/font/google'
 import Script from 'next/script'
@@ -28,7 +27,6 @@ export const metadata: Metadata = {
     'servers',
     'NMAS Innovations',
   ],
-  generator: 'v0.app',
   icons: {
     icon: '/images/nmas-logo.png',
     apple: '/images/nmas-logo.png',
@@ -66,7 +64,6 @@ export default function RootLayout({
             </Script>
           </>
         )}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
   )
