@@ -15,7 +15,7 @@ const trustCards = [
 
 export function Hero() {
   return (
-    <section id="home" className="relative overflow-hidden bg-[#020817] pt-20 lg:pt-28 pb-16 lg:pb-24">
+    <section id="home" className="relative overflow-hidden bg-[#020817] pb-16 pt-28 lg:pb-24 lg:pt-36">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(77,217,255,0.18),transparent_28%),radial-gradient(circle_at_80%_20%,rgba(140,255,216,0.12),transparent_22%)]" />
       <div
         aria-hidden="true"
@@ -43,25 +43,25 @@ export function Hero() {
               className="inline-flex items-center gap-2 rounded-full border border-[#4dd9ff]/20 bg-[#4dd9ff]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#4dd9ff] shadow-[0_0_20px_rgba(77,217,255,0.12)]"
             >
               <span className="h-2 w-2 rounded-full bg-[#4dd9ff] animate-pulse" />
-              NMAS Innovations • South African ICT procurement
+              NMAS Innovations · South African ICT procurement
             </motion.div>
 
             <h1 className="mt-6 font-heading text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
               Future-ready ICT hardware,
-              <span className="block text-[#4dd9ff] bg-clip-text text-transparent bg-gradient-to-r from-[#4dd9ff] via-[#91b8ff] to-[#8cffd8]">
+              <span className="block text-[#57d8ef]">
                 software licensing
               </span>
-              & technology supply solutions.
+              &amp; technology supply solutions.
             </h1>
 
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300/90">
               NMAS Innovations is a trusted South African B2B ICT supplier, delivering genuine hardware, software licensing and enterprise technology procurement services across government, corporate and education sectors.
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3 text-sm font-medium text-slate-300/80">
-              <span className="rounded-full border border-white/10 bg-[#071423]/80 px-4 py-2">Hardware procurement</span>
-              <span className="rounded-full border border-white/10 bg-[#071423]/80 px-4 py-2">Software licensing</span>
-              <span className="rounded-full border border-white/10 bg-[#071423]/80 px-4 py-2">Nationwide distribution</span>
+            <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium text-slate-300/80">
+              <span>Hardware procurement</span>
+              <span>Software licensing</span>
+              <span>Nationwide distribution</span>
             </div>
 
             <motion.div
@@ -72,14 +72,14 @@ export function Hero() {
             >
               <a
                 href="#contact"
-                className="group inline-flex items-center justify-center gap-2 rounded-3xl bg-[#4dd9ff] px-8 py-4 text-sm font-semibold uppercase tracking-wider text-[#020817] shadow-[0_0_40px_rgba(77,217,255,0.2)] transition-all hover:bg-[#0a1128] hover:text-white"
+                className="group inline-flex items-center justify-center gap-2 rounded-lg bg-[#57d8ef] px-7 py-4 text-sm font-semibold uppercase tracking-[0.08em] text-[#020817] transition-colors hover:bg-white"
               >
                 Request an ICT Supplier Quote
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </a>
               <a
                 href="#portfolio"
-                className="inline-flex items-center justify-center gap-2 rounded-3xl border border-white/10 bg-[#071423]/70 px-8 py-4 text-sm font-semibold uppercase tracking-wider text-white transition-all hover:border-[#4dd9ff]/20 hover:bg-[#0a1128]/70"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/15 bg-transparent px-7 py-4 text-sm font-semibold uppercase tracking-[0.08em] text-white transition-colors hover:border-[#57d8ef]/50 hover:text-[#57d8ef]"
               >
                 View Portfolio
               </a>

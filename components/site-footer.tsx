@@ -1,17 +1,24 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 const columns = [
   {
     title: 'Portfolio',
-    links: ['End User Computing', 'Servers & Storage', 'Networking', 'Software Licensing', 'Printing & Accessories'],
+    links: [
+      ['End User Computing', '/solutions/end-user-computing'],
+      ['Servers & Storage', '/solutions/servers-storage'],
+      ['Networking', '/solutions/networking'],
+      ['Software Licensing', '/solutions/software-licensing'],
+      ['Printing & Accessories', '/solutions/printing-accessories'],
+    ],
   },
   {
     title: 'Company',
-    links: ['About Us', 'Target Markets', 'Quality Assurance', 'Contact'],
+    links: [['About Us', '/#about'], ['Target Markets', '/#target-markets'], ['Quality Assurance', '/#quality'], ['Contact', '/#contact']],
   },
   {
     title: 'Sectors',
-    links: ['Government', 'Municipalities', 'TVET Colleges', 'Enterprise'],
+    links: [['Government', '/#target-markets'], ['Municipalities', '/#target-markets'], ['TVET Colleges', '/#target-markets'], ['Enterprise', '/#target-markets']],
   },
 ]
 
@@ -55,14 +62,11 @@ export function SiteFooter() {
                 {col.title}
               </h3>
               <ul className="mt-4 space-y-2.5">
-                {col.links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
-                      className="text-sm text-muted-foreground transition-colors hover:text-navy"
-                    >
-                      {link}
-                    </a>
+                {col.links.map(([label, href]) => (
+                  <li key={label}>
+                    <Link href={href} className="text-sm text-muted-foreground transition-colors hover:text-tech-blue">
+                      {label}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -70,12 +74,18 @@ export function SiteFooter() {
           ))}
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 sm:flex-row">
+        <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-border pt-6 sm:flex-row sm:items-center">
           <p className="text-sm text-muted-foreground">
             &copy; {new Date().getFullYear()} NMAS Innovations. All rights reserved.
           </p>
           <p className="text-sm text-muted-foreground">
-            Enterprise ICT Supplier &middot; South Africa
+            Enterprise ICT Supplier · South Africa
+          </p>
+          <p className="text-xs text-muted-foreground/70">
+            Website designed by{' '}
+            <a href="https://sihleb.co.za" target="_blank" rel="noreferrer" className="font-medium text-muted-foreground underline decoration-white/20 underline-offset-4 transition-colors hover:text-tech-blue">
+              SihleB Digital Studio
+            </a>
           </p>
         </div>
       </div>

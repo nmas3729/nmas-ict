@@ -10,6 +10,7 @@ const portfolioCategories = [
     id: 'euc',
     icon: Laptop,
     title: 'End User Computing',
+    image: '/images/hero-enterprise-new.webp',
     products: ['Business laptops', 'Desktop PCs', 'Workstations', 'Tablets', 'Monitors', 'Docking stations'],
     brands: ['Dell', 'HP', 'Lenovo', 'ASUS', 'Apple', 'Microsoft']
   },
@@ -17,6 +18,7 @@ const portfolioCategories = [
     id: 'servers',
     icon: Server,
     title: 'Servers & Storage',
+    image: '/images/server-room.webp',
     products: ['Servers', 'Storage systems', 'Backup solutions'],
     brands: ['Dell', 'HPE', 'Lenovo', 'Synology']
   },
@@ -24,6 +26,7 @@ const portfolioCategories = [
     id: 'networking',
     icon: Network,
     title: 'Networking',
+    image: '/images/server-room.webp',
     products: ['Switches', 'Routers', 'Wireless', 'Firewalls'],
     brands: ['Cisco', 'Aruba', 'Ubiquiti', 'MikroTik']
   },
@@ -31,6 +34,7 @@ const portfolioCategories = [
     id: 'software',
     icon: KeyRound,
     title: 'Software Licensing',
+    image: '/images/it-team.webp',
     products: ['Microsoft licensing', 'Security software', 'Business software'],
     brands: ['Microsoft', 'Bitdefender', 'Sophos', 'ESET', 'Trend Micro']
   },
@@ -38,6 +42,7 @@ const portfolioCategories = [
     id: 'printing',
     icon: Printer,
     title: 'Printing & Accessories',
+    image: '/images/it-team.webp',
     products: ['Printers', 'Consumables', 'ICT accessories'],
     brands: ['HP', 'Canon', 'Epson', 'Brother', 'Logitech', 'Targus']
   }
@@ -69,6 +74,7 @@ export function Portfolio() {
               return (
                 <button
                   key={category.id}
+                  type="button"
                   onClick={() => setActiveCategory(category.id)}
                   className={`flex items-center gap-4 w-full text-left px-5 py-4 rounded-xl transition-all font-bold text-lg ${
                     isActive 
@@ -100,7 +106,7 @@ export function Portfolio() {
                   >
                     <div className="flex flex-col lg:flex-row gap-6 mb-8">
                       <div className="relative w-full lg:w-1/2 h-48 rounded-xl overflow-hidden shadow-sm border border-white/10 bg-[#071423]/50">
-                        <Image src={`/images/solution-${category.id}.png`} alt={category.title} fill className="object-cover" />
+                        <Image src={category.image} alt={`${category.title} supplied by NMAS Innovations`} fill sizes="(max-width: 1024px) 100vw, 32vw" className="object-cover" />
                       </div>
                       <div className="w-full lg:w-1/2 flex items-center">
                         <div className="flex items-center gap-4">

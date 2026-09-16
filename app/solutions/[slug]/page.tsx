@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
@@ -51,8 +52,26 @@ export function generateStaticParams() {
   }))
 }
 
-export default function SolutionPage({ params }: { params: { slug: string } }) {
-  const content = solutionsContent[params.slug]
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const content = solutionsContent[slug]
+
+  if (!content) {
+    return {}
+  }
+
+  return {
+    title: `${content.title} | NMAS Innovations`,
+    description: content.description,
+    alternates: {
+      canonical: `https://nmas.co.za/solutions/${slug}`,
+    },
+  }
+}
+
+export default async function SolutionPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const content = solutionsContent[slug]
 
   if (!content) {
     notFound()
@@ -61,29 +80,29 @@ export default function SolutionPage({ params }: { params: { slug: string } }) {
   return (
     <>
       <SiteHeader />
-      <main className="pt-24 lg:pt-32 pb-20">
+      <main className="bg-[#020817] pb-20 pt-28 lg:pt-36">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Link href="/#portfolio" className="inline-flex items-center gap-2 text-sm font-bold text-slate-300/60 hover:text-[#00b4d8] mb-8 transition-colors">
+          <Link href="/#portfolio" className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-slate-300/70 transition-colors hover:text-[#57d8ef]">
             <ArrowLeft className="h-4 w-4" />
             Back to Solutions
           </Link>
           
-          <div className="bg-[#0a1128] rounded-3xl p-8 lg:p-16 mb-16 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-[#00b4d8]/10 rounded-full blur-[100px]" />
-            <span className="text-sm font-bold uppercase tracking-widest text-[#00b4d8]">
+          <div className="relative mb-16 overflow-hidden rounded-2xl border border-white/10 bg-[#071423] p-8 lg:p-16">
+            <div className="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-[#0d3a54]/30 to-transparent" />
+            <span className="relative text-sm font-bold uppercase tracking-[0.16em] text-[#57d8ef]">
               Enterprise Solution
             </span>
-            <h1 className="mt-4 font-heading text-4xl lg:text-6xl font-extrabold text-white">
+            <h1 className="relative mt-4 max-w-3xl font-heading text-4xl font-extrabold tracking-tight text-white lg:text-6xl">
               {content.title}
             </h1>
-            <p className="mt-6 text-xl text-white/80 max-w-2xl">
+            <p className="relative mt-6 max-w-2xl text-lg leading-relaxed text-white/75 lg:text-xl">
               {content.description}
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12 lg:gap-24 mb-20">
             <div>
-              <h2 className="text-2xl font-extrabold text-white mb-6 border-b border-white/10 pb-4">
+              <h2 className="mb-6 border-b border-white/10 pb-4 text-2xl font-extrabold text-white">
                 Products Supplied
               </h2>
               <ul className="space-y-4">
@@ -97,12 +116,12 @@ export default function SolutionPage({ params }: { params: { slug: string } }) {
             </div>
             
             <div>
-              <h2 className="text-2xl font-extrabold text-white mb-6 border-b border-white/10 pb-4">
+              <h2 className="mb-6 border-b border-white/10 pb-4 text-2xl font-extrabold text-white">
                 Trusted Brands
               </h2>
               <ul className="flex flex-wrap gap-3">
                 {content.brands.map((brand: string) => (
-                  <li key={brand} className="px-5 py-3 bg-[#071423]/70 border border-white/10 rounded-xl text-lg font-bold text-slate-200">
+                  <li key={brand} className="rounded-lg border border-white/10 bg-[#071423] px-5 py-3 text-lg font-bold text-slate-200">
                     {brand}
                   </li>
                 ))}

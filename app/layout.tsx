@@ -16,6 +16,7 @@ const manrope = Manrope({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://nmas.co.za'),
   title: 'NMAS Innovations | South African B2B ICT Supplier',
   description: 'NMAS Innovations supplies brand-new genuine ICT hardware, software licensing and enterprise technology solutions to organisations across South Africa.',
   keywords: [
@@ -31,6 +32,23 @@ export const metadata: Metadata = {
     icon: '/images/nmas-logo.png',
     apple: '/images/nmas-logo.png',
     shortcut: '/images/nmas-logo.png',
+  },
+  alternates: {
+    canonical: 'https://nmas.co.za/',
+  },
+  openGraph: {
+    type: 'website',
+    url: 'https://nmas.co.za/',
+    title: 'NMAS Innovations | South African B2B ICT Supplier',
+    description: 'Genuine ICT hardware, software licensing and procurement support for South African organisations.',
+    siteName: 'NMAS Innovations',
+    images: [{ url: '/images/hero-enterprise-new.webp', width: 1200, height: 900, alt: 'Enterprise ICT professionals collaborating in a modern boardroom' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'NMAS Innovations | South African B2B ICT Supplier',
+    description: 'Genuine ICT hardware, software licensing and procurement support for South African organisations.',
+    images: ['/images/hero-enterprise-new.webp'],
   },
 }
 

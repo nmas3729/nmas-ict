@@ -60,13 +60,13 @@
   --popover: rgba(7, 18, 35, 0.95);
   --popover-foreground: #eff7ff;
   --muted: rgba(10, 18, 35, 0.4);
-  --muted-foreground: #9ccfff;
+  --muted-foreground: #a8b8c9;
 
   --navy: #081426;
   --navy-foreground: #eff7ff;
-  --tech-blue: #4dd9ff;
+  --tech-blue: #57d8ef;
   --tech-blue-foreground: #020817;
-  --gold: #8cffd8;
+  --gold: #d6b36a;
   --gold-foreground: #020817;
 
   --primary: #4dd9ff;
@@ -77,9 +77,9 @@
   --accent-foreground: #020817;
 
   --destructive: #ff5c8a;
-  --border: rgba(77, 217, 255, 0.22);
-  --input: rgba(77, 217, 255, 0.12);
-  --ring: #4dd9ff;
+  --border: rgba(177, 198, 219, 0.18);
+  --input: rgba(177, 198, 219, 0.16);
+  --ring: #57d8ef;
 
   --chart-1: #0f4b8f;
   --chart-2: #4dd9ff;
@@ -94,8 +94,8 @@
   }
 
   html {
-    background: radial-gradient(circle at top left, rgba(77, 217, 255, 0.12), transparent 22%),
-      radial-gradient(circle at bottom right, rgba(140, 255, 216, 0.1), transparent 24%),
+    background: radial-gradient(circle at top left, rgba(77, 217, 255, 0.08), transparent 22%),
+      radial-gradient(circle at bottom right, rgba(214, 179, 106, 0.06), transparent 24%),
       var(--background);
   }
 
@@ -104,6 +104,7 @@
     font-feature-settings: 'cv11', 'ss01';
     min-height: 100vh;
     background-attachment: fixed;
+    overflow-x: hidden;
   }
 
   ::selection {
@@ -125,6 +126,11 @@
   h5,
   h6 {
     @apply font-heading;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--tech-blue);
+    outline-offset: 3px;
   }
 }
 

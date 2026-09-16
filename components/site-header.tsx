@@ -39,8 +39,8 @@ export function SiteHeader() {
       className={cn(
         'fixed inset-x-0 top-0 z-50 transition-all duration-300',
         scrolled
-          ? 'border-b border-[#4dd9ff]/15 bg-[#020817]/95 backdrop-blur-xl shadow-[0_20px_80px_rgba(0,212,255,0.16)]'
-          : 'border-b border-transparent bg-transparent',
+          ? 'border-b border-white/10 bg-[#020817]/95 shadow-[0_18px_50px_rgba(0,0,0,0.28)] backdrop-blur-xl'
+          : 'border-b border-white/5 bg-[#020817]/80 backdrop-blur-md',
       )}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:h-20 lg:px-8">
@@ -73,13 +73,14 @@ export function SiteHeader() {
             <button
               type="button"
               onClick={() => setSolutionsOpen((value) => !value)}
-              className="flex items-center gap-1 text-sm font-semibold text-muted-foreground transition-colors hover:text-tech-blue"
+              aria-expanded={solutionsOpen}
+              className="flex items-center gap-1 rounded-md text-sm font-semibold text-muted-foreground transition-colors hover:text-tech-blue"
             >
               Solutions
               <ChevronDown className="h-4 w-4" />
             </button>
             {solutionsOpen && (
-              <div className="absolute top-full left-1/2 z-20 w-72 -translate-x-1/2 rounded-3xl border border-[#4dd9ff]/15 bg-[#020817]/95 p-3 shadow-[0_20px_60px_rgba(0,212,255,0.2)] backdrop-blur-xl">
+              <div className="absolute left-1/2 top-[calc(100%+0.75rem)] z-20 w-72 -translate-x-1/2 rounded-2xl border border-white/10 bg-[#071423] p-3 shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
                 {solutionsNav.map((link) => (
                   <Link
                     key={link.href}
@@ -110,7 +111,7 @@ export function SiteHeader() {
         <div className="hidden lg:flex">
           <Link
             href="/#contact"
-            className="group inline-flex items-center gap-2 rounded-full bg-tech-blue px-6 py-2.5 text-sm font-semibold uppercase tracking-wider text-tech-blue-foreground shadow-[0_0_30px_rgba(77,217,255,0.25)] transition-all hover:bg-[#0a1128] hover:text-white"
+            className="group inline-flex items-center gap-2 rounded-lg bg-tech-blue px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.08em] text-tech-blue-foreground transition-colors hover:bg-white hover:text-[#020817]"
           >
             Request Quote
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -120,7 +121,7 @@ export function SiteHeader() {
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-[#4dd9ff]/15 bg-[#071423]/85 text-foreground lg:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/15 bg-[#071423] text-foreground lg:hidden"
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
         >
@@ -130,7 +131,7 @@ export function SiteHeader() {
 
       <div
         className={cn(
-          'overflow-y-auto border-t border-[#4dd9ff]/10 bg-[#020817]/95 transition-[max-height] duration-300 ease-out lg:hidden',
+          'overflow-y-auto border-t border-white/10 bg-[#020817] transition-[max-height] duration-300 ease-out lg:hidden',
           open ? 'max-h-[calc(100vh-4rem)]' : 'max-h-0',
         )}
       >
@@ -148,7 +149,7 @@ export function SiteHeader() {
                 Solutions
               </span>
               <span className="rounded-full bg-[#4dd9ff]/10 px-2 py-1 text-[0.65rem] font-semibold text-[#4dd9ff]">
-                6 items
+                5 categories
               </span>
             </div>
             <div className="flex flex-col gap-1 pl-4 border-l-2 border-[#4dd9ff]/20">
@@ -188,7 +189,7 @@ export function SiteHeader() {
           <Link
             href="/#contact"
             onClick={() => setOpen(false)}
-            className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-3xl bg-[#4dd9ff] px-4 py-3 text-base font-semibold uppercase tracking-wider text-[#020817] transition-all hover:bg-[#0a1128] hover:text-white"
+            className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#4dd9ff] px-4 py-3 text-base font-semibold uppercase tracking-[0.08em] text-[#020817] transition-colors hover:bg-white"
           >
             Request Quote
             <ArrowRight className="h-4 w-4" />

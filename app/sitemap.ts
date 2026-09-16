@@ -5,12 +5,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const solutions = [
     'end-user-computing',
-    'servers-and-storage',
+    'servers-storage',
     'networking',
-    'printing',
+    'printing-accessories',
     'collaboration',
     'software-licensing',
-    'accessories',
   ]
 
   const solutionUrls = solutions.map((slug) => ({

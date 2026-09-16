@@ -6,6 +6,7 @@ import { ArrowRight, CheckCircle2, Phone, Mail, MapPin, UploadCloud, FileText } 
 
 export function Contact() {
   const [submitted, setSubmitted] = useState(false)
+  const [fileName, setFileName] = useState('')
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -97,10 +98,18 @@ export function Contact() {
                   <label className="mb-2 block text-sm font-bold text-white">
                     Upload RFQ / BOQ (Optional)
                   </label>
-                  <div className="border-2 border-dashed border-white/10 rounded-xl p-6 text-center hover:bg-[#0a1128]/40 transition-colors cursor-pointer group">
+                  <label htmlFor="rfq-file" className="block cursor-pointer rounded-xl border-2 border-dashed border-white/15 p-6 text-center transition-colors hover:border-[#57d8ef]/60 hover:bg-[#0a1128]/40 group">
                     <UploadCloud className="h-8 w-8 text-slate-300/40 mx-auto mb-2 group-hover:text-[#4dd9ff] transition-colors" />
-                    <span className="text-sm text-slate-300/70 font-medium">Click to upload PDF, Excel, or Word documents</span>
-                  </div>
+                    <span className="block text-sm text-slate-300/70 font-medium">{fileName || 'Choose a PDF, Excel, or Word document'}</span>
+                    <input
+                      id="rfq-file"
+                      name="rfq-file"
+                      type="file"
+                      accept=".pdf,.xls,.xlsx,.doc,.docx"
+                      className="sr-only"
+                      onChange={(event) => setFileName(event.target.files?.[0]?.name ?? '')}
+                    />
+                  </label>
                 </div>
 
                 <div>
@@ -150,13 +159,14 @@ function Field({
   return (
     <div>
       <label htmlFor={name} className="mb-2 block text-sm font-bold text-white">
-        {label}
+        {label}{required && <span className="ml-1 text-[#57d8ef]" aria-hidden="true">*</span>}
       </label>
       <input
         id={name}
         name={name}
         type={type}
         required={required}
+        aria-required={required}
         placeholder={placeholder}
         className="w-full rounded-xl border border-white/10 bg-[#071423]/70 px-4 py-3 text-sm text-white outline-none transition-all placeholder:text-slate-300/50 focus:border-[#4dd9ff] focus:ring-4 focus:ring-[#4dd9ff]/10"
       />
