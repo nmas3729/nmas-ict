@@ -57,6 +57,9 @@ importers:
       '@types/react-dom':
         specifier: ^19
         version: 19.2.3(@types/react@19.2.14)
+      eslint:
+        specifier: 9.39.5
+        version: 9.39.5(jiti@2.7.0)
       postcss:
         specifier: ^8.5
         version: 8.5.6
