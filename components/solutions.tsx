@@ -37,13 +37,13 @@ const solutions = [
     icon: Monitor,
     title: 'ICT Equipment',
     description:
-      'New technology equipment selected around documented organisational requirements.',
+      'New technology equipment sourced to meet stated customer requirements.',
   },
   {
     icon: PackageCheck,
     title: 'Procurement Solutions',
     description:
-      'B2B technology procurement support for defined equipment and licensing needs.',
+      'Technology procurement support for defined equipment and licensing needs.',
   },
 ]
 
@@ -56,11 +56,11 @@ export function Solutions() {
             Our Solutions
           </span>
           <h2 className="mt-3 text-balance font-heading text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
-            ICT supply focused on organisational requirements
+            ICT supply for organisations and individuals
           </h2>
           <p className="mt-4 text-pretty text-lg leading-relaxed text-muted-foreground">
             NMAS Innovations provides new technology equipment, software licensing
-            and procurement solutions for business and institutional buyers.
+            and procurement solutions for organisations and individual customers.
           </p>
         </Reveal>
 

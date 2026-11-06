@@ -1,92 +1,52 @@
-'use client'
+import { Check, X } from 'lucide-react'
 
-import { motion } from 'framer-motion'
-import { CheckCircle, XCircle } from 'lucide-react'
-
-const suppliesOnly = [
+const supplied = [
   'Genuine manufacturer products',
   'Manufacturer warranty',
   'New equipment only',
   'Trusted supply channels',
-  'Professional quotation support'
-]
+  'Professional quotation support',
+] as const
 
-const doesNotSupply = [
-  'Used equipment',
-  'Refurbished equipment',
-  'Grey imports'
-]
+const notSupplied = ['Used equipment', 'Refurbished equipment', 'Grey imports'] as const
 
 export function Quality() {
   return (
-    <section id="quality" className="bg-[#0a1128] py-20 lg:py-28 relative overflow-hidden scroll-mt-20">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0a1128] to-[#0a1128]/95" />
-      
-      {/* Abstract Background pattern */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#00b4d8]/5 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2" />
+    <section id="quality" className="scroll-mt-24 bg-[#071321] py-20 sm:py-24">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-16 lg:px-8">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">Quality assurance</p>
+          <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+            New, genuine ICT products
+          </h2>
+          <p className="mt-4 text-base leading-relaxed text-slate-400 sm:text-lg">
+            NMAS Innovations supplies brand-new genuine ICT products sourced through trusted distribution channels.
+          </p>
+        </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <motion.div 
-            initial={false}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="text-sm font-bold uppercase tracking-widest text-[#00b4d8]">
-              Quality Assurance
-            </span>
-            <h2 className="mt-4 font-heading text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
-              Genuine Products. Manufacturer Warranty.
-            </h2>
-            <p className="mt-6 text-lg leading-relaxed text-white/80">
-              NMAS Innovations supplies brand-new genuine ICT products sourced through trusted distribution channels.
-            </p>
-          </motion.div>
-
-          <div className="grid sm:grid-cols-2 gap-6">
-            <motion.div 
-              initial={false}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-[#071423]/70 border border-white/10 rounded-2xl p-8 backdrop-blur-sm"
-            >
-              <div className="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
-                <CheckCircle className="h-6 w-6 text-[#00b4d8]" />
-                <h3 className="text-xl font-bold text-white">Customers receive:</h3>
-              </div>
-              <ul className="space-y-4">
-                {suppliesOnly.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-white/80 font-medium">
-                    <CheckCircle className="h-5 w-5 text-[#00b4d8] shrink-0 mt-0.5" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-
-            <motion.div 
-              initial={false}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="bg-[#071423]/70 border border-white/10 rounded-2xl p-8 backdrop-blur-sm relative overflow-hidden"
-            >
-              {/* Subtle warning red glow for "does not supply" */}
-              <div className="absolute bottom-0 right-0 w-32 h-32 bg-red-500/10 rounded-full blur-2xl" />
-              
-              <div className="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
-                <XCircle className="h-6 w-6 text-red-400" />
-                <h3 className="text-xl font-bold text-white">NMAS does not supply:</h3>
-              </div>
-              <ul className="space-y-4">
-                {doesNotSupply.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-white/80 font-medium relative z-10">
-                    <XCircle className="h-5 w-5 text-red-400 shrink-0 mt-0.5" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <section aria-labelledby="supplies-heading" className="rounded-xl border border-slate-700/70 bg-[#0b192a] p-6 sm:p-7">
+            <h3 id="supplies-heading" className="font-heading text-lg font-bold text-white">Customers receive</h3>
+            <ul className="mt-5 space-y-3">
+              {supplied.map((item) => (
+                <li key={item} className="flex items-start gap-3 text-sm leading-relaxed text-slate-300">
+                  <Check aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-cyan-300" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+          <section aria-labelledby="not-supplied-heading" className="rounded-xl border border-slate-700/70 bg-[#0b192a] p-6 sm:p-7">
+            <h3 id="not-supplied-heading" className="font-heading text-lg font-bold text-white">NMAS does not supply</h3>
+            <ul className="mt-5 space-y-3">
+              {notSupplied.map((item) => (
+                <li key={item} className="flex items-start gap-3 text-sm leading-relaxed text-slate-300">
+                  <X aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-slate-500" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
         </div>
       </div>
     </section>

@@ -12,7 +12,7 @@ export function Infrastructure() {
               ICT Equipment Procurement
             </span>
             <h2 className="mt-3 text-balance font-heading text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
-              New technology equipment for organisational requirements
+              New technology equipment sourced for customer requirements
             </h2>
             <p className="mt-4 text-pretty text-lg leading-relaxed text-muted-foreground">
               NMAS Innovations supplies new ICT equipment for defined business and

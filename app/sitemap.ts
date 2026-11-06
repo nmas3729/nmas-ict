@@ -1,31 +1,36 @@
-import { MetadataRoute } from 'next'
+import type { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://nmas.co.za'
-
-  const solutions = [
-    'end-user-computing',
-    'servers-storage',
-    'networking',
-    'printing-accessories',
-    'collaboration',
-    'software-licensing',
-  ]
-
-  const solutionUrls = solutions.map((slug) => ({
-    url: `${baseUrl}/solutions/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.8,
-  }))
-
   return [
     {
-      url: baseUrl,
+      url: 'https://nmas.co.za/',
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1,
     },
-    ...solutionUrls,
+    {
+      url: 'https://nmas.co.za/solutions',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: 'https://nmas.co.za/markets',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: 'https://nmas.co.za/about',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: 'https://nmas.co.za/contact',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
   ]
 }

@@ -1,201 +1,111 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { useEffect, useState } from 'react'
+import { ArrowRight, Menu, X } from 'lucide-react'
 
-const solutionsNav = [
-  { label: 'Enterprise ICT Solutions', href: '/#portfolio' },
-  { label: 'End User Computing', href: '/solutions/end-user-computing' },
-  { label: 'Servers & Storage', href: '/solutions/servers-storage' },
-  { label: 'Networking', href: '/solutions/networking' },
-  { label: 'Software Licensing', href: '/solutions/software-licensing' },
-  { label: 'Printing & Accessories', href: '/solutions/printing-accessories' },
+const navigation = [
+  { label: 'Solutions', href: '/solutions' },
+  { label: 'Markets', href: '/markets' },
+  { label: 'About', href: '/about' },
+  { label: 'Quality Assurance', href: '/about#quality' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 export function SiteHeader() {
-  const [scrolled, setScrolled] = useState(false)
-  const [open, setOpen] = useState(false)
-  const [solutionsOpen, setSolutionsOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    function closeOnEscape(event: KeyboardEvent) {
+      if (event.key === 'Escape') setMenuOpen(false)
+    }
+
+    window.addEventListener('keydown', closeOnEscape)
+    return () => window.removeEventListener('keydown', closeOnEscape)
   }, [])
 
-  useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [open])
-
   return (
-    <header
-      className={cn(
-        'fixed inset-x-0 top-0 z-50 transition-all duration-300',
-        scrolled
-          ? 'border-b border-white/10 bg-[#020817]/95 shadow-[0_18px_50px_rgba(0,0,0,0.28)] backdrop-blur-xl'
-          : 'border-b border-white/5 bg-[#020817]/80 backdrop-blur-md',
-      )}
-    >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:h-20 lg:px-8">
-        <Link href="/#home" className="flex items-center gap-3" aria-label="NMAS Innovations home">
-          <div className="relative flex h-11 w-11 items-center justify-center rounded-3xl bg-[#071423] border border-[#4dd9ff]/15 shadow-[0_0_25px_rgba(77,217,255,0.18)]">
-            <Image
-              src="/images/nmas-logo.png"
-              alt="NMAS Innovations logo"
-              width={32}
-              height={32}
-              className="h-8 w-8"
-              priority
-            />
-          </div>
+    <header className="sticky top-0 z-50 border-b border-white/[0.08] bg-[#050c18]/95 text-white backdrop-blur">
+      <div className="mx-auto flex min-h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:min-h-[76px] lg:px-8">
+        <Link href="/" className="flex shrink-0 items-center gap-3 rounded-sm" aria-label="NMAS Innovations home">
+          <Image
+            src="/images/nmas-logo.png"
+            alt=""
+            width={42}
+            height={42}
+            priority
+            className="h-10 w-10 object-contain"
+          />
           <span className="flex flex-col leading-none">
-            <span className="font-heading text-lg font-extrabold tracking-tight text-white">
-              NMAS
-            </span>
-            <span className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-slate-300/70">
-              Innovations
-            </span>
+            <span className="font-heading text-lg font-extrabold tracking-tight text-white">NMAS</span>
+            <span className="mt-1 text-[0.62rem] font-semibold uppercase tracking-[0.17em] text-slate-400">Innovations</span>
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex" aria-label="Main navigation">
-          <Link href="/#home" className="text-sm font-semibold text-muted-foreground transition-colors hover:text-tech-blue">
-            Home
-          </Link>
-          <div className="relative" onMouseEnter={() => setSolutionsOpen(true)} onMouseLeave={() => setSolutionsOpen(false)}>
-            <button
-              type="button"
-              onClick={() => setSolutionsOpen((value) => !value)}
-              aria-expanded={solutionsOpen}
-              className="flex items-center gap-1 rounded-md text-sm font-semibold text-muted-foreground transition-colors hover:text-tech-blue"
+        <nav className="hidden items-center gap-7 lg:flex" aria-label="Main navigation">
+          {navigation.map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              className="rounded-sm text-sm font-medium text-slate-300 transition-colors hover:text-cyan-300"
             >
-              Solutions
-              <ChevronDown className="h-4 w-4" />
-            </button>
-            {solutionsOpen && (
-              <div className="absolute left-1/2 top-[calc(100%+0.75rem)] z-20 w-72 -translate-x-1/2 rounded-2xl border border-white/10 bg-[#071423] p-3 shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
-                {solutionsNav.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setSolutionsOpen(false)}
-                    className="block rounded-2xl px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-[#4dd9ff]/10 hover:text-tech-blue"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-          <Link href="/#about" className="text-sm font-semibold text-muted-foreground transition-colors hover:text-tech-blue">
-            About
-          </Link>
-          <Link href="/#target-markets" className="text-sm font-semibold text-muted-foreground transition-colors hover:text-tech-blue">
-            Target Markets
-          </Link>
-          <Link href="/#quality" className="text-sm font-semibold text-muted-foreground transition-colors hover:text-tech-blue">
-            Quality Assurance
-          </Link>
-          <Link href="/#contact" className="text-sm font-semibold text-muted-foreground transition-colors hover:text-tech-blue">
-            Contact
-          </Link>
+              {item.label}
+            </Link>
+          ))}
         </nav>
 
-        <div className="hidden lg:flex">
-          <Link
-            href="/#contact"
-            className="group inline-flex items-center gap-2 rounded-lg bg-tech-blue px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.08em] text-tech-blue-foreground transition-colors hover:bg-white hover:text-[#020817]"
-          >
-            Request Quote
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-          </Link>
-        </div>
+        <Link
+          href="/contact"
+          className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-bold uppercase tracking-wide text-[#071321] transition-colors hover:bg-cyan-100 sm:text-sm lg:min-h-11 lg:px-5"
+        >
+          <span className="sm:hidden">Quote</span>
+          <span className="hidden sm:inline">Request Quote</span>
+          <ArrowRight aria-hidden="true" className="h-4 w-4" />
+        </Link>
 
         <button
           type="button"
-          onClick={() => setOpen((v) => !v)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/15 bg-[#071423] text-foreground lg:hidden"
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          aria-expanded={open}
+          className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-slate-700 text-white hover:bg-white/5 lg:hidden"
+          aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-navigation"
+          onClick={() => setMenuOpen((open) => !open)}
         >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {menuOpen ? <X aria-hidden="true" className="h-5 w-5" /> : <Menu aria-hidden="true" className="h-5 w-5" />}
         </button>
       </div>
 
-      <div
-        className={cn(
-          'overflow-y-auto border-t border-white/10 bg-[#020817] transition-[max-height] duration-300 ease-out lg:hidden',
-          open ? 'max-h-[calc(100vh-4rem)]' : 'max-h-0',
-        )}
+      <nav
+        id="mobile-navigation"
+        hidden={!menuOpen}
+        className="border-t border-white/[0.08] bg-[#071321] px-4 py-4 shadow-lg lg:hidden"
+        aria-label="Mobile navigation"
       >
-        <nav className="flex flex-col gap-1 px-4 py-4" aria-label="Mobile navigation">
-          <Link
-            href="/#home"
-            onClick={() => setOpen(false)}
-            className="rounded-2xl px-3 py-3 text-base font-semibold text-muted-foreground transition-colors hover:bg-[#4dd9ff]/10 hover:text-tech-blue"
-          >
-            Home
-          </Link>
-          <div className="px-3 py-3">
-            <div className="mb-2 flex items-center justify-between gap-2">
-              <span className="text-sm font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                Solutions
-              </span>
-              <span className="rounded-full bg-[#4dd9ff]/10 px-2 py-1 text-[0.65rem] font-semibold text-[#4dd9ff]">
-                5 categories
-              </span>
-            </div>
-            <div className="flex flex-col gap-1 pl-4 border-l-2 border-[#4dd9ff]/20">
-              {solutionsNav.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="rounded-2xl px-3 py-2 text-base font-semibold text-muted-foreground transition-colors hover:bg-[#4dd9ff]/10 hover:text-tech-blue"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-          <Link
-            href="/#about"
-            onClick={() => setOpen(false)}
-            className="rounded-2xl px-3 py-3 text-base font-semibold text-muted-foreground transition-colors hover:bg-[#4dd9ff]/10 hover:text-tech-blue"
-          >
-            About
-          </Link>
-          <Link
-            href="/#target-markets"
-            onClick={() => setOpen(false)}
-            className="rounded-2xl px-3 py-3 text-base font-semibold text-muted-foreground transition-colors hover:bg-[#4dd9ff]/10 hover:text-tech-blue"
-          >
-            Target Markets
-          </Link>
-          <Link
-            href="/#quality"
-            onClick={() => setOpen(false)}
-            className="rounded-2xl px-3 py-3 text-base font-semibold text-muted-foreground transition-colors hover:bg-[#4dd9ff]/10 hover:text-tech-blue"
-          >
-            Quality Assurance
-          </Link>
-          <Link
-            href="/#contact"
-            onClick={() => setOpen(false)}
-            className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#4dd9ff] px-4 py-3 text-base font-semibold uppercase tracking-[0.08em] text-[#020817] transition-colors hover:bg-white"
-          >
-            Request Quote
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        </nav>
-      </div>
+        <ul className="mx-auto flex max-w-7xl flex-col gap-1">
+          {navigation.map((item) => (
+            <li key={item.label}>
+              <Link
+                href={item.href}
+                onClick={() => setMenuOpen(false)}
+                className="block rounded-md px-3 py-3 font-medium text-slate-200 hover:bg-white/5 hover:text-cyan-300"
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
+          <li className="pt-2">
+            <Link
+              href="/contact"
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center justify-center gap-2 rounded-md bg-cyan-300 px-4 py-3 font-semibold text-slate-950 hover:bg-cyan-200"
+            >
+              Request Quote
+              <ArrowRight aria-hidden="true" className="h-4 w-4" />
+            </Link>
+          </li>
+        </ul>
+      </nav>
     </header>
   )
 }

@@ -1,73 +1,52 @@
-'use client'
+import {
+  CircleDollarSign,
+  ClipboardCheck,
+  FileText,
+  Package,
+  Search,
+  Settings,
+  ShieldCheck,
+  Truck,
+} from 'lucide-react'
 
-import { motion } from 'framer-motion'
-import { FileSpreadsheet, Search, CheckSquare, PackageSearch, Calculator, ShoppingCart, Truck, ShieldCheck } from 'lucide-react'
-
-const steps = [
-  { icon: FileSpreadsheet, title: 'Submit RFQ or Bill of Quantities' },
-  { icon: Search, title: 'Review Requirements' },
-  { icon: CheckSquare, title: 'Validate Specifications' },
-  { icon: PackageSearch, title: 'Product Sourcing' },
-  { icon: Calculator, title: 'Competitive Quotation' },
-  { icon: ShoppingCart, title: 'Order Processing' },
-  { icon: Truck, title: 'Nationwide Delivery' },
-  { icon: ShieldCheck, title: 'Manufacturer Warranty & Support' },
-]
+const procurementSteps = [
+  { title: 'Submit RFQ or Bill of Quantities', icon: FileText },
+  { title: 'Review Requirements', icon: Search },
+  { title: 'Validate Specifications', icon: ClipboardCheck },
+  { title: 'Product Sourcing', icon: Package },
+  { title: 'Competitive Quotation', icon: CircleDollarSign },
+  { title: 'Order Processing', icon: Settings },
+  { title: 'Nationwide Delivery', icon: Truck },
+  { title: 'Manufacturer Warranty & Support', icon: ShieldCheck },
+] as const
 
 export function Workflow() {
   return (
-    <section className="bg-[#020817] py-20 lg:py-28 overflow-hidden relative">
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-[#4dd9ff]/10 -skew-x-12 translate-x-20" />
-
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-sm font-bold uppercase tracking-widest text-[#4dd9ff]">
-            Procurement Process
-          </span>
-          <h2 className="mt-4 font-heading text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
-            Enterprise ICT Supply Workflow
+    <section id="procurement-process" className="border-y border-white/[0.07] bg-[#081321] py-20 text-white sm:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">Procurement process</p>
+          <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+            A clear path from RFQ to supply
           </h2>
-          <p className="mt-4 text-lg text-slate-300/70">
-            Our streamlined procurement methodology ensures requirement review, specification validation, product sourcing and quotation support.
+          <p className="mt-4 text-base leading-relaxed text-slate-400 sm:text-lg">
+            Share your requirements and move through each procurement stage with support from NMAS. Manufacturer warranty enquiries are coordinated through the relevant manufacturer or distribution channel.
           </p>
         </div>
 
-        <div className="relative">
-          {/* Connecting Line */}
-          <div className="hidden lg:block absolute top-1/2 left-0 w-full h-1 bg-[#0a1128]/10 -translate-y-1/2 rounded-full overflow-hidden">
-            <motion.div 
-              initial={{ x: '-100%' }}
-              animate={{ x: ['-100%', '100%'] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
-              className="w-1/3 h-full bg-gradient-to-r from-transparent via-[#00b4d8] to-transparent" 
-            />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
-            {steps.map((step, idx) => (
-              <motion.div 
-                key={idx}
-                initial={false}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.1, duration: 0.5 }}
-                className="relative flex flex-col items-center text-center group"
-              >
-                <div className="w-16 h-16 rounded-2xl bg-[#071423]/60 shadow-xl shadow-[#4dd9ff]/10 flex items-center justify-center border-2 border-white/10 group-hover:border-[#4dd9ff] transition-colors relative z-10">
-                  <step.icon className="h-7 w-7 text-white group-hover:text-[#4dd9ff] transition-colors" />
-                  
-                  {/* Step Number Badge */}
-                  <div className="absolute -top-3 -right-3 w-7 h-7 bg-[#0a1128] text-white rounded-full flex items-center justify-center text-xs font-bold border-2 border-white">
-                    {idx + 1}
-                  </div>
-                </div>
-                
-                <h3 className="mt-6 font-bold text-lg text-white leading-tight">
-                  {step.title}
-                </h3>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+        <ol className="mt-12 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+          {procurementSteps.map(({ title, icon: Icon }, index) => (
+            <li key={title} className="workflow-step relative flex flex-col items-center px-2 text-center">
+              <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border border-cyan-300/30 bg-[#0b1a2c] text-cyan-300">
+                <Icon aria-hidden="true" className="h-6 w-6" />
+              </span>
+              <span className="mt-3 text-xs font-bold uppercase tracking-[0.14em] text-cyan-300">
+                Step {index + 1}
+              </span>
+              <h3 className="mt-2 max-w-56 font-semibold leading-relaxed text-slate-100">{title}</h3>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   )
