@@ -3,6 +3,7 @@
 import { useRef, useState, type ChangeEvent, type FormEvent } from 'react'
 import { Mail, MapPin, Phone } from 'lucide-react'
 import { trackEvent } from '@/components/google-analytics'
+import { readQuoteResponse } from '@/lib/quote-response'
 
 const maximumFileSize = 10 * 1024 * 1024
 const acceptedExtensions = ['pdf', 'doc', 'docx', 'xls', 'xlsx']
@@ -61,12 +62,20 @@ export function Contact() {
         method: 'POST',
         body: new FormData(formElement),
       })
-      const result: { error?: string } = await response.json()
+      const result = await readQuoteResponse(response)
 
-      if (!response.ok) {
+      if (result.kind === 'error') {
         setStatus({
           kind: 'error',
-          message: result.error ?? 'We could not submit your request. Please try again or contact NMAS directly.',
+          message: result.message,
+        })
+        return
+      }
+
+      if (result.kind === 'invalid-response') {
+        setStatus({
+          kind: 'error',
+          message: 'The quote service returned an unreadable response. Please try again or email hello@nmas.co.za.',
         })
         return
       }

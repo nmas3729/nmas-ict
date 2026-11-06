@@ -12,6 +12,8 @@ Install dependencies with `pnpm install` and start the development server with `
 
 The `/api/quote` endpoint sends requests through Resend. Configure these server-side environment variables in Coolify for the deployed application:
 
+- `SITE_URL` — the public site URL used to verify quote-form request origins.
+- `ALLOWED_ORIGINS` — optional comma-separated list of additional legitimate origins, such as a production alias or preview host. Origins not explicitly listed are rejected.
 - `RESEND_API_KEY` — Resend API key.
 - `QUOTE_TO_EMAIL` — inbox that should receive quote requests; use `hello@nmas.co.za`.
 - `QUOTE_FROM_EMAIL` — sender address verified with Resend. Verify the sender address with Resend before configuring it; do not assume `hello@nmas.co.za` is verified.

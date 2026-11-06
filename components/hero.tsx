@@ -61,10 +61,11 @@ export function Hero() {
             <Image
               src="/images/hero-enterprise-new.webp"
               alt="Technology professionals collaborating in a modern meeting room"
-              width={1200}
-              height={900}
+              width={1280}
+              height={1280}
               priority
-              sizes="(max-width: 1024px) 100vw, 46vw"
+              fetchPriority="high"
+              sizes="(max-width: 639px) calc(100vw - 2rem), (max-width: 1023px) calc(100vw - 3rem), 46vw"
               className="aspect-[4/3] w-full object-cover"
             />
           </div>

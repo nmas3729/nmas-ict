@@ -1,3 +1,5 @@
+import { quoteAcceptedMessage } from '../../../lib/quote-response.ts'
+
 const maximumFileSize = 10 * 1024 * 1024
 const maximumRequestSize = maximumFileSize + 128 * 1024
 const allowedExtensions = new Set(['pdf', 'doc', 'docx', 'xls', 'xlsx'])
@@ -21,6 +23,37 @@ function errorResponse(error: string, status: number) {
 function textField(form: FormData, name: string) {
   const value = form.get(name)
   return typeof value === 'string' ? value.trim() : null
+}
+
+function normalizeOrigin(value: string) {
+  try {
+    const url = new URL(value)
+    if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password) return null
+    return url.origin
+  } catch {
+    return null
+  }
+}
+
+function configuredOrigins() {
+  const siteUrl = process.env.SITE_URL?.trim()
+  const siteOrigin = siteUrl ? normalizeOrigin(siteUrl) : null
+  if (!siteOrigin) return null
+
+  const origins = new Set([siteOrigin])
+  const additionalOrigins = process.env.ALLOWED_ORIGINS?.trim()
+  if (additionalOrigins) {
+    const values = additionalOrigins.split(',').map((value) => value.trim())
+    if (values.some((value) => !value)) return null
+
+    for (const value of values) {
+      const origin = normalizeOrigin(value)
+      if (!origin) return null
+      origins.add(origin)
+    }
+  }
+
+  return origins
 }
 
 async function validateBoundedBody(request: Request) {
@@ -103,14 +136,14 @@ function matchesFileSignature(extension: string, file: Buffer) {
 }
 
 export async function POST(request: Request) {
-  const origin = request.headers.get('origin')
-  let originIsValid = false
-  try {
-    if (origin) originIsValid = new URL(origin).origin === new URL(request.url).origin
-  } catch {
-    originIsValid = false
+  const origins = configuredOrigins()
+  if (!origins) {
+    return errorResponse('Quote submissions are temporarily unavailable because origin configuration is missing or invalid. Please contact NMAS directly.', 503)
   }
-  if (!originIsValid) {
+
+  const origin = request.headers.get('origin')
+  const normalizedOrigin = origin ? normalizeOrigin(origin) : null
+  if (!normalizedOrigin || !origins.has(normalizedOrigin)) {
     return errorResponse('This quote request could not be verified. Please refresh the page and try again.', 403)
   }
 
@@ -218,7 +251,7 @@ export async function POST(request: Request) {
   const from = process.env.QUOTE_FROM_EMAIL?.trim()
 
   if (!apiKey || !to || !from) {
-    return errorResponse('Quote submission is not available right now. Please email hello@nmas.co.za or call 067 487 7278.', 503)
+    return errorResponse('Quote submissions are temporarily unavailable because email delivery is not configured. Please email hello@nmas.co.za or call 067 487 7278.', 503)
   }
 
   const emailText = [
@@ -264,7 +297,7 @@ export async function POST(request: Request) {
   }
 
   return Response.json(
-    { message: 'Your quote request has been accepted for delivery.' },
+    { message: quoteAcceptedMessage },
     { headers: { 'Cache-Control': 'no-store' } },
   )
 }

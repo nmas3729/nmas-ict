@@ -32,9 +32,9 @@ export function SiteHeader() {
           <Image
             src="/images/nmas-logo.png"
             alt=""
-            width={42}
-            height={42}
-            priority
+            width={40}
+            height={40}
+            sizes="40px"
             className="h-10 w-10 object-contain"
           />
           <span className="flex flex-col leading-none">
